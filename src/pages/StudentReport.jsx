@@ -53,8 +53,6 @@ const StudentReport = () => {
     setPreviousNotificationCount(notifications.length);
   }, [notifications]);
 
-  console.log(notifications);
-
   return (
     <div className="studentReport__container">
       <section className="studentReport__section-one">

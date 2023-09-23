@@ -19,7 +19,7 @@ const Gallery = () => {
         console.log(err);
       });
   }, []);
-  console.log(indexImg);
+
   return (
     <div className="gallery__container">
       {gallery?.map((photo) => (

@@ -2,7 +2,6 @@ import React from "react";
 import "./componentsStyle/debts.css";
 
 const Debts = ({ data, setselectData }) => {
-  console.log(data);
   return (
     <div className="notes__container">
       <section className="attendance__section-one">
