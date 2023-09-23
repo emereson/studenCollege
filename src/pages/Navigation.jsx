@@ -7,21 +7,24 @@ const Navigation = ({ userData }) => {
 
   return (
     <nav className="navigation__container">
-      <div>
-        <img src="/colegioLogo.png" alt="" />
+      <div onClick={() => setshowMenu(false)}>
+        <Link to="/">
+          {" "}
+          <img src="/colegioLogo.png" alt="" />
+        </Link>
       </div>
 
       <ul className={`navigation__ul ${!showMenu ? "shomMenu" : ""}`}>
-        <li>
+        <li onClick={() => setshowMenu(false)}>
           <Link to="/">CONÓCENOS</Link>
         </li>
-        <li>
+        <li onClick={() => setshowMenu(false)}>
           <Link to="/niveles">NIVELES</Link>
         </li>
-        <li>
+        <li onClick={() => setshowMenu(false)}>
           <Link to="/galeria-fotos">GALERIA DE FOTOS</Link>
         </li>
-        <li>
+        <li onClick={() => setshowMenu(false)}>
           <Link to="/reporte-estudiante">REPORTE DEL ESTUDIANTE</Link>
         </li>
       </ul>
