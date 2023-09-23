@@ -1,0 +1,38 @@
+.calendar__container {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding-top: 5em;
+}
+
+.calendart__section-one {
+  width: 100vw;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 5em;
+  overflow-y: auto;
+}
+
+.calendart__section-one article {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1em;
+}
+
+.calendart__section-one h3 {
+  font-size: 1.2em;
+  font-weight: 500;
+}

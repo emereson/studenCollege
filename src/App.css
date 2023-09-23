@@ -1,0 +1,19 @@
+.app__container {
+  position: relative;
+  width: 100%;
+  max-width: 1500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
+  margin: auto;
+  min-height: 100%;
+  padding-top: 5em;
+}
+
+@media (max-width: 850px) {
+  .app__container {
+    padding-top: 4em;
+  }
+}

@@ -1,0 +1,8 @@
+.debts__ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--body-blue);
+  font-weight: 500;
+}

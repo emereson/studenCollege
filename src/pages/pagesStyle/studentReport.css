@@ -1,0 +1,207 @@
+.studentReport__container {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  background-color: rgb(248, 248, 248);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 2em;
+}
+
+.studentReport__section-one {
+  position: relative;
+  width: 100vw;
+  padding: 1em;
+  padding-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--body-blue);
+  gap: 1em;
+  color: var(--body-white);
+}
+.studentReport__section-one p {
+  position: absolute;
+  top: 0.5em;
+  right: 4em;
+  font-size: 0.7em;
+  border: 0.15em solid var(--body-white);
+  padding: 0.5em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.studentReport__section-one p:hover {
+  background-color: var(--body-white);
+  color: var(--body-blue);
+  transition: 0.5s;
+}
+.studentReport__section-one img {
+  width: 7em;
+  height: 7em;
+}
+
+.studentReport__section-one h3 {
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
+.studentReport__section-one select {
+  padding: 0.3em 0.5em 0.3em 0.5em;
+  background-color: var(--body-blue);
+  color: var(--body-white);
+  border: 0.1em solid var(--body-white);
+  border-radius: 0.5em;
+  font-size: 1em;
+}
+
+/* studentReport__section */
+.studentReport__section-two {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+  padding-bottom: 2em;
+}
+
+.studentReport__section-two article {
+  width: 45%;
+  max-width: 11em;
+  height: 5em;
+  padding: 1em;
+  background-color: var(--body-white);
+  box-shadow: 0 0 0.5em 0.1em rgb(207, 207, 207);
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8em;
+  text-align: center;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.studentReport__section-two article:hover {
+  background-color: var(--body-blue);
+  color: white;
+  transition: 0.5s;
+}
+
+.studentReport__section-two p {
+  font-size: 0.8em;
+  font-weight: 500;
+}
+.studentReport__section-two img {
+  width: 2em;
+  height: 2em;
+}
+
+.studentReport__section-two-notifications {
+  position: relative;
+  width: 95% !important;
+  max-width: 25em !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start !important;
+  gap: 0.3em !important;
+  padding-left: 3.5em !important;
+}
+.studentReport__section-two-notifications h4 {
+  display: flex;
+  gap: 0.5em;
+  font-size: 1.2em;
+}
+.studentReport__section-two-notifications span {
+  width: 1.5em;
+  height: 1.5em;
+  background-color: rgb(231, 3, 3);
+  font-size: 0.8em;
+  color: var(--body-white);
+  padding: 0.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.studentReport__section-two-notifications p {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.studentReport__section-two-notifications i {
+  position: absolute;
+  left: 0.5em;
+  font-size: 1.8em;
+  color: rgb(231, 209, 3);
+}
+
+/* notification__container */
+
+.notification__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.667);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  padding-top: 2.5em;
+}
+.notification__container i {
+  color: var(--body-white);
+  font-size: 2.5em;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.notification__container i:hover {
+  color: red;
+  transition: 0.5s;
+}
+
+.notification__container article {
+  width: 90%;
+  max-width: 800px;
+  height: 70%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 4em;
+  padding: 2em 1em 2em 1em;
+  background-color: var(--body-white);
+}
+
+.notification__container div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.notification__container h3 {
+  font-size: 1.4em;
+  text-align: center;
+  font-weight: 500;
+}
+
+@media (max-width: 850px) {
+  .studentReport__section-one p {
+    right: 1em;
+  }
+}

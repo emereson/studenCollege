@@ -1,0 +1,75 @@
+.attendance__container {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding-top: 5em;
+}
+
+.attendance__section-one {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--body-blue);
+  color: var(--body-white);
+}
+.attendance__section-one p {
+  position: absolute;
+  left: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.attendance__section-one h3 {
+  margin: auto;
+  font-size: 1.1em;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* attendance__section-two */
+.attendance__section-two {
+  width: 95%;
+  max-width: 1000px;
+}
+
+.attendance__calendar {
+  width: 100%;
+}
+.attended-day {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.attended-day-item {
+  font-size: 0.8em;
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.react-calendar__tile {
+  padding-bottom: 1em;
+  position: relative;
+}

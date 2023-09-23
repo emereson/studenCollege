@@ -1,0 +1,22 @@
+.observations__section-one {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+}
+
+.observations__section-one ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.observations__section-one li {
+  width: 100%;
+  text-align: center;
+}

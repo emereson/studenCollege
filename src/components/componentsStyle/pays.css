@@ -1,0 +1,57 @@
+.pays__section-one {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.pays__section-one h4 {
+  width: 100%;
+
+  display: flex;
+  gap: 1em;
+  font-size: 1.2em;
+  color: var(--body-blue);
+  justify-content: start;
+  align-items: center;
+}
+
+.pays__section-one img {
+  width: 1.5em;
+}
+.paySection-article-one {
+  width: 100vw;
+  background-color: var(--body-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paySection-article-one div {
+  width: 100%;
+  max-width: 1000px;
+  color: white;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paySection__div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--body-blue);
+  font-weight: 500;
+}
+
+.paySection__div ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 0.5em;
+}
