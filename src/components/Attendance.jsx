@@ -8,8 +8,7 @@ const Attendance = ({ data, setselectData }) => {
     if (view === "month") {
       const attendedDates = data?.filter((item) => {
         return (
-          new Date(item.createdAt).toLocaleDateString() ===
-          date.toLocaleDateString()
+          new Date(item.date).toLocaleDateString() === date.toLocaleDateString()
         );
       });
 
