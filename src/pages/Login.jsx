@@ -58,10 +58,18 @@ const Login = () => {
       </form>
 
       <section className="login__section-two">
-        <a href="http://" target="_blank" rel="noopener noreferrer">
+        <a
+          href="http://bit.ly/informesymatriculas"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <i className="bx bxs-phone"></i>Contáctenos
         </a>
-        <a href="http://" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.google.com/maps/place/Colegio+ALIPIO+PONCE+-+Satipo/@-11.2353135,-74.6397717,17z/data=!3m1!4b1!4m6!3m5!1s0x910bc119eeb6fd9d:0x181aefeb7fa019ca!8m2!3d-11.2353188!4d-74.6371968!16s%2Fg%2F11fjxfvnkd?entry=ttu"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <i className="bx bxs-map"></i>Ubicanos
         </a>
       </section>

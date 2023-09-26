@@ -86,7 +86,13 @@ const Notes = ({ data, setselectData }) => {
                 {weekData?.exams.map((exam) => (
                   <tr key={exam.id}>
                     <td>{exam.name}</td>
-                    <td>{exam.note}</td>
+                    <td>
+                      {exam.note === "20"
+                        ? "A"
+                        : exam.note === "10"
+                        ? "B"
+                        : "C"}
+                    </td>
                   </tr>
                 ))}
               </tbody>
