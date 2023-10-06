@@ -67,6 +67,9 @@
   .navigation__section-one i {
     display: block;
   }
+  .navigation__container img {
+    width: 2.5em !important;
+  }
   .navigation__ul {
     position: absolute;
     top: 4em;
