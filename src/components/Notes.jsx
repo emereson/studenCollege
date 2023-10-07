@@ -13,7 +13,8 @@ const Notes = ({ data, setselectData }) => {
         (total, exam) => total + parseFloat(exam.note),
         0
       );
-      return totalNotes / weekData.exams.length;
+      const average = totalNotes / weekData.exams.length;
+      return Math.round(average);
     }
     return 0;
   };
