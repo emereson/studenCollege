@@ -7,9 +7,7 @@ const Attendance = ({ data, setselectData }) => {
   const tileContent = ({ date, view }) => {
     if (view === "month") {
       const attendedDates = data?.filter((item) => {
-        return (
-          new Date(item.date).toLocaleDateString() === date.toLocaleDateString()
-        );
+        return item.date === date.toLocaleDateString("en-CA");
       });
 
       if (attendedDates?.length > 0) {
