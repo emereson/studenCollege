@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./componentsStyle/attendance.css";
 
 const Attendance = ({ data, setselectData }) => {
+const [selectedDate, setSelectedDate] = useState();
+ 
+ 
+useEffect(() => {
+  setSelectedDate(new Date(data[data.length -1]?.date))
+}, [])
+
   const tileContent = ({ date, view }) => {
     if (view === "month") {
       const attendedDates = data?.filter((item) => {
@@ -47,7 +54,12 @@ const Attendance = ({ data, setselectData }) => {
         <h3>REPORTE DE ASISTENCIA</h3>
       </section>
       <section className="attendance__section-two">
-        <Calendar className="attendance__calendar" tileContent={tileContent} />
+        <Calendar
+          className="attendance__calendar"
+          tileContent={tileContent}
+          value={selectedDate}
+          onChange={setSelectedDate}
+        />
       </section>
     </div>
   );

@@ -36,24 +36,25 @@
 /* notes__viewSummary */
 .notes__viewSummary {
   position: fixed;
-  top: 0;
+  top: 2em;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.419);
-  top: 4em;
   display: flex;
   flex-direction: column;
   gap: 1em;
   justify-content: center;
   align-items: center;
 }
+
 .notes__viewSummary i {
   font-size: 2em;
   color: white;
   transition: 0.5s;
   cursor: pointer;
 }
+
 .notes__viewSummary i:hover {
   font-size: 2em;
   color: rgb(255, 9, 9);
@@ -61,26 +62,27 @@
 }
 
 .notes__viewSummary article {
+  position: relative;
   width: 90%;
-  height: 70%;
+  height: 80%;
   background-color: var(--body-white);
-  overflow: auto;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   padding: 1em;
+  overflow: auto;
 }
 
 .notes__viewSummary ul {
-  position: relative;
+  position: absolute;
   width: 100%;
-  height: auto;
+  height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   gap: 1em;
+  overflow: hidden;
 }
 
 .notes__viewSummary li {
@@ -90,21 +92,41 @@
 }
 
 .note__statistics {
-  position: absolute;
-  height: 100%;
-  bottom: -2.5em;
+  position: relative;
+  height: 450px;
+  width: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
   gap: 1em;
-  left: 4em;
+  padding-right: 2em;
+  left: 2.5em;
 }
+
 .note__statistics div {
+  position: relative;
+  width: 60px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: end;
   text-align: center;
+}
+
+.note__statistics__p {
+  width: 100%;
+  margin-bottom: -2em;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  justify-content: end !important;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.note__statistics__p p {
+  font-size: 0.8em;
 }
 
 /* .notes__section-two */
@@ -129,6 +151,7 @@
   text-align: center;
   transition: 0.5s;
   cursor: pointer;
+
 }
 
 .notes__section-two p:hover {
@@ -159,6 +182,7 @@
   transition: 0.5s;
   cursor: pointer;
 }
+
 .notes__section-three i:hover {
   color: red;
   transition: 0.5s;
@@ -185,7 +209,14 @@
   background-color: var(--body-white);
   padding: 0.5em;
 }
+
 .notes__section-three td {
   background-color: var(--body-white);
   padding: 0.5em;
+}
+
+@media (max-height: 500px) {
+  .notes__viewSummary article {
+    height: 60%;
+  }
 }

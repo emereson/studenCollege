@@ -7,17 +7,22 @@ const Notes = ({ data, setselectData }) => {
   const [weekData, setweekData] = useState(null);
   const [summaryData, setsummaryData] = useState([]);
 
-  const califications = () => {
-    if (weekData && weekData.exams && weekData.exams.length > 0) {
-      const totalNotes = weekData.exams.reduce(
-        (total, exam) => total + parseFloat(exam.note),
-        0
-      );
-      const average = totalNotes / weekData.exams.length;
-      return Math.round(average);
-    }
-    return 0;
-  };
+const califications = () => {
+  if (weekData && weekData.exams && weekData.exams.length > 0) {
+    const totalNotes = weekData.exams.reduce(
+      (total, exam) => total + parseFloat(exam.note),
+      0
+    );
+    const average = totalNotes / weekData.exams.length;
+    // Redondear la calificación promedio a dos decimales
+    const roundedAverage = average.toFixed(2);
+    return roundedAverage;
+  }
+  return 0;
+};
+
+
+
 
   const allCalifications = () => {
     const lastFiveData = data?.slice(-5);
@@ -125,37 +130,30 @@ const Notes = ({ data, setselectData }) => {
               <li>02</li>
               <li>00</li>
               <li>start</li>
-              <li
-                style={{
-                  border: "none",
-                  position: "absolute",
-                  height: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "end",
-                }}
+             
+            </ul>
+             <div
+                className="note__statistics"
               >
-                <div className="note__statistics">
                   {summaryData?.map((data) => (
                     <div key={data.name}>
-                      <span>
-                        <p>{data.averageNote}</p>
+                      <div className="note__statistics__p">
+                       <p>{data.averageNote.toFixed(2)}</p>
                         <p>{data.name}</p>
-                      </span>
+                      </div>
                       <p
                         style={{
                           position: "absolute",
-                          marginBottom: "2.5em",
+                           bottom:"1em",
                           width: "2em",
                           background: "skyblue",
-                          height: `calc(4.9 * ${data.averageNote}%)`, // Utilizar data.averageNote en lugar de averageNote
+                          height: `calc(4.8 * ${data.averageNote}%)`, // Utilizar data.averageNote en lugar de averageNote
                         }}
                       ></p>
                     </div>
                   ))}
                 </div>
-              </li>{" "}
-            </ul>
+           
           </article>
         </section>
       ) : (
