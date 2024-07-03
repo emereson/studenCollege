@@ -5,10 +5,11 @@ import "./componentsStyle/attendance.css";
 
 const Attendance = ({ data, setselectData }) => {
 const [selectedDate, setSelectedDate] = useState();
- 
- 
+  
 useEffect(() => {
-  setSelectedDate(new Date(data[data.length -1]?.date))
+  if (data) {
+    setSelectedDate(new Date(data[data?.length -1]?.date))
+  }
 }, [])
 
   const tileContent = ({ date, view }) => {

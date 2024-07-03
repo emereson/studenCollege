@@ -20,7 +20,7 @@ const StudentReport = () => {
 
   useEffect(() => {
     const url = `${import.meta.env.VITE_URL_API}accessStudent/${
-      userData?.student.id
+      userData?.student?.id
     }`;
 
     axios
@@ -53,6 +53,7 @@ const StudentReport = () => {
     setPreviousNotificationCount(notifications.length);
   }, [notifications]);
 
+
   return (
     <div className="studentReport__container">
       <section className="studentReport__section-one">
@@ -65,9 +66,9 @@ const StudentReport = () => {
         >
           Cerrar Sesión
         </p>
-        <img src={userData?.student.studentImg} alt="" />
+        <img src={userData?.student?.studentImg} alt="" />
         <h3>
-          {userData?.student.name} {userData?.student.lastName}
+          {userData?.student?.name} {userData?.student?.lastName}
         </h3>
         <select
           value={JSON.stringify(dataClassroom)}
