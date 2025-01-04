@@ -6,6 +6,7 @@
   justify-content: start;
   align-items: center;
   gap: 1.5em;
+  overflow-y: auto;
 }
 
 .pays__section-one h4 {

@@ -8,12 +8,16 @@ import Pays from "../components/Pays";
 import Debts from "../components/Debts";
 import Calendar from "../components/Calendar";
 import Observation from "../components/Observation";
+import Loading from "../hooks/Loading";
 
 const StudentReport = () => {
   const userDataJSON = localStorage.getItem("userData");
   const userData = JSON.parse(userDataJSON);
   const [dataStudent, setdataStudent] = useState();
+  const [dataClassroomId, setDataClassroomId] = useState();
   const [dataClassroom, setDataClassroom] = useState();
+  const [loading, setLoading] = useState(false);
+
   const [selectData, setselectData] = useState();
   const [notifications, setnotifications] = useState([]);
   const [previousNotificationCount, setPreviousNotificationCount] = useState(0);
@@ -53,9 +57,30 @@ const StudentReport = () => {
     setPreviousNotificationCount(notifications.length);
   }, [notifications]);
 
+  useEffect(() => {
+    setLoading(true);
+    const url = `${
+      import.meta.env.VITE_URL_API
+    }accessStudent/classroom/${dataClassroomId}`;
+
+    axios
+      .get(url, config)
+      .then((res) => {
+        console.log(res);
+
+        setDataClassroom(res.data.classroom);
+      })
+      .catch((err) => {
+        setDataClassroom();
+      })
+      .finally(() => setLoading(false));
+  }, [dataClassroomId]);
+
+  console.log(dataClassroom);
 
   return (
     <div className="studentReport__container">
+      {loading && <Loading />}
       <section className="studentReport__section-one">
         <p
           onClick={() => {
@@ -71,14 +96,13 @@ const StudentReport = () => {
           {userData?.student?.name} {userData?.student?.lastName}
         </h3>
         <select
-          value={JSON.stringify(dataClassroom)}
-          onChange={(e) => setDataClassroom(JSON.parse(e.target.value))}
+          onChange={(e) => setDataClassroomId(e.target.value)}
           name=""
           id=""
         >
           <option value="">seleccione un aula</option>
           {dataStudent?.classrooms.map((classroom) => (
-            <option key={classroom.id} value={JSON.stringify(classroom)}>
+            <option key={classroom.id} value={classroom.id}>
               {classroom.name}
             </option>
           ))}

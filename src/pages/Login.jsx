@@ -18,7 +18,7 @@ const Login = () => {
         localStorage.setItem("token", res.data.token);
         const userDataJSON = JSON.stringify(res.data);
         localStorage.setItem("userData", userDataJSON);
-        navigate("/");
+        navigate("/reporte-estudiante");
         window.location.reload();
       })
 
