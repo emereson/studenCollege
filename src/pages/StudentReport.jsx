@@ -75,6 +75,8 @@ const StudentReport = () => {
           setDataClassroom();
         })
         .finally(() => setLoading(false));
+    } else {
+      setDataClassroom();
     }
   }, [dataClassroomId]);
 
