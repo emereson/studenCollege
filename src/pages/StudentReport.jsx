@@ -58,22 +58,24 @@ const StudentReport = () => {
   }, [notifications]);
 
   useEffect(() => {
-    setLoading(true);
-    const url = `${
-      import.meta.env.VITE_URL_API
-    }accessStudent/classroom/${dataClassroomId}`;
+    if (dataClassroomId > 0) {
+      setLoading(true);
+      const url = `${
+        import.meta.env.VITE_URL_API
+      }accessStudent/classroom/${dataClassroomId}`;
 
-    axios
-      .get(url, config)
-      .then((res) => {
-        console.log(res);
+      axios
+        .get(url, config)
+        .then((res) => {
+          console.log(res);
 
-        setDataClassroom(res.data.classroom);
-      })
-      .catch((err) => {
-        setDataClassroom();
-      })
-      .finally(() => setLoading(false));
+          setDataClassroom(res.data.classroom);
+        })
+        .catch((err) => {
+          setDataClassroom();
+        })
+        .finally(() => setLoading(false));
+    }
   }, [dataClassroomId]);
 
   console.log(dataClassroom);
