@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./componentsStyle/pays.css";
+import axios from "axios";
+import config from "../utils/getToken";
+import formatDate from "../hooks/formatDate";
 
-const Pays = ({ data, setselectData }) => {
+const Pays = ({ dataClassroomId, setselectData }) => {
+  const [pays, setPays] = useState([]);
+  useEffect(() => {
+    const url = `${
+      import.meta.env.VITE_URL_API
+    }accessStudent/pays/${dataClassroomId}`;
+
+    axios
+      .get(url, config)
+      .then((res) => {
+        setPays(res.data.pays);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [dataClassroomId]);
   return (
     <div className="notes__container">
       <section className="attendance__section-one">
@@ -23,7 +41,7 @@ const Pays = ({ data, setselectData }) => {
             <p>Monto</p>
           </div>
         </article>
-        {data?.map((pay) => (
+        {pays?.map((pay) => (
           <div className="paySection__div" key={pay.id}>
             <ul>
               <li>{pay.name}</li>
@@ -31,7 +49,7 @@ const Pays = ({ data, setselectData }) => {
             </ul>
             <ul>
               <li>S/.{pay.amount}</li>
-              <li>{pay.date}</li>
+              <li>{formatDate(pay.date)}</li>
             </ul>
           </div>
         ))}

@@ -200,6 +200,11 @@
   font-weight: 500;
 }
 
+.studentReport__section-two-archivos {
+  display: flex;
+  gap: 1rem;
+}
+
 @media (max-width: 850px) {
   .studentReport__section-one p {
     right: 1em;

@@ -7,6 +7,7 @@
   align-items: center;
   gap: 1.5em;
   overflow-y: auto;
+  padding-bottom: 5rem;
 }
 
 .pays__section-one h4 {

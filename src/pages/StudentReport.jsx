@@ -2,200 +2,186 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import config from "../utils/getToken";
 import Attendance from "../components/Attendance";
-import "./pagesStyle/studentReport.css";
 import Notes from "../components/Notes";
 import Pays from "../components/Pays";
 import Debts from "../components/Debts";
 import Calendar from "../components/Calendar";
 import Observation from "../components/Observation";
-import Loading from "../hooks/Loading";
+import "./pagesStyle/studentReport.css";
+import Files from "../components/Files";
 
 const StudentReport = () => {
-  const userDataJSON = localStorage.getItem("userData");
-  const userData = JSON.parse(userDataJSON);
-  const [dataStudent, setdataStudent] = useState();
-  const [dataClassroomId, setDataClassroomId] = useState();
-  const [dataClassroom, setDataClassroom] = useState();
-  const [loading, setLoading] = useState(false);
-
-  const [selectData, setselectData] = useState();
-  const [notifications, setnotifications] = useState([]);
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  const [dataStudent, setDataStudent] = useState(null);
+  const [dataClassroomId, setDataClassroomId] = useState("");
+  const [selectData, setSelectData] = useState("");
+  const [notifications, setNotifications] = useState([]);
   const [previousNotificationCount, setPreviousNotificationCount] = useState(0);
+  const [classroomId, setClassroomId] = useState("");
+
+  const API_URL = import.meta.env.VITE_URL_API;
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_URL_API}accessStudent/${
-      userData?.student?.id
-    }`;
+    const fetchStudentData = async () => {
+      try {
+        const { data } = await axios.get(
+          `${API_URL}accessStudent/${userData?.student?.id}`,
+          config
+        );
+        const student = data.student;
+        setDataStudent(student);
+        const lastClassroom = student.classrooms_students.at(-1);
+        if (lastClassroom) setDataClassroomId(lastClassroom.id);
+      } catch (error) {
+        console.error("Error fetching student data:", error);
+      }
+    };
 
-    axios
-      .get(url, config)
-      .then((res) => {
-        setdataStudent(res.data.student);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fetchStudentData();
   }, []);
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_URL_API}accessStudent/notifications`;
+    if (!dataStudent || !dataClassroomId) return;
 
-    axios
-      .get(url, config)
-      .then((res) => {
-        setnotifications(res.data.notifications);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const classroom = dataStudent.classrooms_students.find(
+      (c) => c.id === Number(dataClassroomId)
+    );
+
+    if (classroom) setClassroomId(classroom.classroom_id);
+  }, [dataClassroomId, dataStudent]);
+  console.log(classroomId);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const { data } = await axios.get(
+          `${API_URL}accessStudent/notifications`,
+          config
+        );
+        setNotifications(data.notifications);
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    };
+
+    fetchNotifications();
   }, []);
 
   useEffect(() => {
     if (notifications.length > previousNotificationCount) {
-      setselectData("notifications");
+      setSelectData("notifications");
     }
     setPreviousNotificationCount(notifications.length);
   }, [notifications]);
 
-  useEffect(() => {
-    if (dataClassroomId > 0) {
-      setLoading(true);
-      const url = `${
-        import.meta.env.VITE_URL_API
-      }accessStudent/classroom/${dataClassroomId}`;
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
 
-      axios
-        .get(url, config)
-        .then((res) => {
-          console.log(res);
-
-          setDataClassroom(res.data.classroom);
-        })
-        .catch((err) => {
-          setDataClassroom();
-        })
-        .finally(() => setLoading(false));
-    } else {
-      setDataClassroom();
-    }
-  }, [dataClassroomId]);
-
-  console.log(dataClassroom);
+  const handleChangeClassroom = (e) => setDataClassroomId(e.target.value);
 
   return (
     <div className="studentReport__container">
-      {loading && <Loading />}
       <section className="studentReport__section-one">
-        <p
-          onClick={() => {
-            localStorage.clear();
-
-            window.location.reload();
-          }}
-        >
-          Cerrar Sesión
-        </p>
-        <img src={userData?.student?.studentImg} alt="" />
+        <p onClick={handleLogout}>Cerrar Sesión</p>
+        <img src={userData?.student?.studentImg} alt="Foto estudiante" />
         <h3>
           {userData?.student?.name} {userData?.student?.lastName}
         </h3>
-        <select
-          onChange={(e) => setDataClassroomId(e.target.value)}
-          name=""
-          id=""
-        >
-          <option value="">seleccione un aula</option>
-          {dataStudent?.classrooms.map((classroom) => (
-            <option key={classroom.id} value={classroom.id}>
-              {classroom.name}
+
+        <select onChange={handleChangeClassroom} value={dataClassroomId}>
+          {dataStudent?.classrooms_students.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.classroom.name}
             </option>
           ))}
         </select>
       </section>
 
       <section className="studentReport__section-two">
-        <article onClick={() => setselectData("attendance")}>
-          <p>REPORTE DE ASISTENCIA </p> <img src="./attendace.png" alt="" />
-        </article>
-        <article onClick={() => setselectData("notes")}>
-          <p>REPORTE DE NOTAS</p> <img src="./notes.png" alt="" />
-        </article>
-        <article onClick={() => setselectData("pays")}>
-          <p>SUS PAGOS</p> <img src="./pay.jpeg" alt="" />
-        </article>
-        <article onClick={() => setselectData("debts")}>
-          <p>SUS DEUDAS </p> <img src="./debt.png" alt="" />
-        </article>
-        <article onClick={() => setselectData("calendar")}>
-          <p>CALENDARIO</p> <img src="./calendar.png" alt="" />
-        </article>
-        <article onClick={() => setselectData("observation")}>
-          <p>OBSERVACIONES </p> <img src="./observation.png" alt="" />
-        </article>
+        {[
+          {
+            label: "REPORTE DE ASISTENCIA",
+            value: "attendance",
+            img: "./attendace.png",
+          },
+          { label: "REPORTE DE NOTAS", value: "notes", img: "./notes.png" },
+          { label: "SUS PAGOS", value: "pays", img: "./pay.jpeg" },
+          { label: "SUS DEUDAS", value: "debts", img: "./debt.png" },
+          { label: "CALENDARIO", value: "calendar", img: "./calendar.png" },
+          {
+            label: "OBSERVACIONES",
+            value: "observation",
+            img: "./observation.png",
+          },
+        ].map(({ label, value, img }) => (
+          <article key={value} onClick={() => setSelectData(value)}>
+            <p>{label}</p>
+            <img src={img} alt={label} />
+          </article>
+        ))}
+
         <article
           className="studentReport__section-two-notifications"
-          onClick={() => setselectData("notifications")}
+          onClick={() => setSelectData("notifications")}
         >
           <i className="bx bxs-bell-ring"></i>
           <h4>
-            Alertas <span>{notifications?.length}</span>
+            Alertas <span>{notifications.length}</span>
           </h4>
           <p>Se le notifica si hay nuevas alertas</p>
         </article>
+        <article
+          className="studentReport__section-two-archivos"
+          onClick={() => setSelectData("archivos")}
+        >
+          <img src="./9746449.png" alt="" />
+          <h4>Archivos</h4>
+        </article>
       </section>
-      {selectData === "notifications" ? (
+
+      {selectData === "notifications" && (
         <div className="notification__container">
-          <i onClick={() => setselectData("")} className="bx bxs-x-circle"></i>
+          <i onClick={() => setSelectData("")} className="bx bxs-x-circle"></i>
           <article>
-            {notifications?.map((notification) => (
-              <div key={notification.id}>
-                <h3>{notification.title}</h3>
-                <img src={notification.notificationImg} alt="" />
+            {notifications.map((n) => (
+              <div key={n.id}>
+                <h3>{n.title}</h3>
+                <img src={n.notificationImg} alt={n.title} />
               </div>
             ))}
           </article>
         </div>
-      ) : (
-        ""
       )}
 
-      {selectData === "attendance" ? (
+      {selectData === "attendance" && (
         <Attendance
-          setselectData={setselectData}
-          data={dataClassroom?.attendances}
+          setselectData={setSelectData}
+          dataClassroomId={dataClassroomId}
         />
-      ) : (
-        ""
       )}
-      {selectData === "notes" ? (
-        <Notes setselectData={setselectData} data={dataClassroom?.courses} />
-      ) : (
-        ""
+      {selectData === "notes" && (
+        <Notes
+          setselectData={setSelectData}
+          dataClassroomId={dataClassroomId}
+        />
       )}
-
-      {selectData === "pays" ? (
-        <Pays setselectData={setselectData} data={dataClassroom?.payments} />
-      ) : (
-        ""
+      {selectData === "pays" && (
+        <Pays setselectData={setSelectData} dataClassroomId={dataClassroomId} />
       )}
-
-      {selectData === "debts" ? (
-        <Debts setselectData={setselectData} data={dataStudent?.debts} />
-      ) : (
-        ""
+      {selectData === "debts" && (
+        <Debts setselectData={setSelectData} data={dataStudent?.debts} />
       )}
-      {selectData === "calendar" ? (
-        <Calendar setselectData={setselectData} />
-      ) : (
-        ""
-      )}
-      {selectData === "observation" ? (
+      {selectData === "calendar" && <Calendar setselectData={setSelectData} />}
+      {selectData === "observation" && (
         <Observation
-          setselectData={setselectData}
+          setselectData={setSelectData}
           data={dataStudent?.observations}
         />
-      ) : (
-        ""
+      )}
+      {selectData === "archivos" && (
+        <Files setselectData={setSelectData} classroomId={classroomId} />
       )}
     </div>
   );

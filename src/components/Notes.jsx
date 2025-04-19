@@ -1,28 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./componentsStyle/notes.css";
+import axios from "axios";
+import config from "../utils/getToken";
+import Loading from "../hooks/Loading";
 
-const Notes = ({ data, setselectData }) => {
+const Notes = ({ setselectData, dataClassroomId }) => {
+  const [exams, setExams] = useState([]);
   const [viewDataWeek, setviewDataWeek] = useState(false);
   const [viewSummary, setviewSummary] = useState(false);
   const [weekData, setweekData] = useState(null);
   const [summaryData, setsummaryData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-const califications = () => {
-  if (weekData && weekData.exams && weekData.exams.length > 0) {
-    const totalNotes = weekData.exams.reduce(
-      (total, exam) => total + parseFloat(exam.note),
-      0
-    );
-    const average = totalNotes / weekData.exams.length;
-    // Redondear la calificación promedio a dos decimales
-    const roundedAverage = average.toFixed(2);
-    return roundedAverage;
-  }
-  return 0;
-};
+  useEffect(() => {
+    setLoading(true);
 
+    const url = `${
+      import.meta.env.VITE_URL_API
+    }accessStudent/exams/${dataClassroomId}`;
 
+    axios
+      .get(url, config)
+      .then((res) => {
+        setExams(res.data.exams);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [dataClassroomId]);
 
+  const califications = () => {
+    if (weekData && weekData.courses && weekData.courses.length > 0) {
+      const totalNotes = weekData.courses.reduce(
+        (total, exam) => total + parseFloat(exam.note),
+        0
+      );
+      const average = totalNotes / weekData.courses.length;
+      // Redondear la calificación promedio a dos decimales
+      const roundedAverage = average.toFixed(2);
+      return roundedAverage;
+    }
+    return 0;
+  };
 
   const allCalifications = () => {
     const lastFiveData = data?.slice(-5);
@@ -41,6 +63,8 @@ const califications = () => {
 
   return (
     <div className="notes__container">
+      {loading && <Loading />}
+
       <section className="attendance__section-one">
         <p onClick={() => setselectData("")}>
           {" "}
@@ -59,7 +83,7 @@ const califications = () => {
         </p>
       </section>
       <section className="notes__section-two">
-        {data?.map((week) => (
+        {exams?.map((week) => (
           <p
             onClick={() => {
               setviewDataWeek(true);
@@ -89,13 +113,13 @@ const califications = () => {
                 </tr>
               </thead>
               <tbody>
-                {weekData?.exams.map((exam) => (
-                  <tr key={exam.id}>
-                    <td>{exam.name}</td>
+                {weekData?.courses.map((course) => (
+                  <tr key={course.id}>
+                    <td>{course.name}</td>
                     <td>
-                      {exam.note === "20"
+                      {course.note === "20"
                         ? "A"
-                        : exam.note === "10"
+                        : course.note === "10"
                         ? "B"
                         : "C"}
                     </td>
@@ -130,30 +154,26 @@ const califications = () => {
               <li>02</li>
               <li>00</li>
               <li>start</li>
-             
             </ul>
-             <div
-                className="note__statistics"
-              >
-                  {summaryData?.map((data) => (
-                    <div key={data.name}>
-                      <div className="note__statistics__p">
-                       <p>{data.averageNote.toFixed(2)}</p>
-                        <p>{data.name}</p>
-                      </div>
-                      <p
-                        style={{
-                          position: "absolute",
-                           bottom:"1em",
-                          width: "2em",
-                          background: "skyblue",
-                          height: `calc(4.8 * ${data.averageNote}%)`, // Utilizar data.averageNote en lugar de averageNote
-                        }}
-                      ></p>
-                    </div>
-                  ))}
+            <div className="note__statistics">
+              {summaryData?.map((data) => (
+                <div key={data.name}>
+                  <div className="note__statistics__p">
+                    <p>{data.averageNote.toFixed(2)}</p>
+                    <p>{data.name}</p>
+                  </div>
+                  <p
+                    style={{
+                      position: "absolute",
+                      bottom: "1em",
+                      width: "2em",
+                      background: "skyblue",
+                      height: `calc(4.8 * ${data.averageNote}%)`, // Utilizar data.averageNote en lugar de averageNote
+                    }}
+                  ></p>
                 </div>
-           
+              ))}
+            </div>
           </article>
         </section>
       ) : (
