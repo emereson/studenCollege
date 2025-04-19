@@ -93,7 +93,7 @@ const StudentReport = () => {
         <select onChange={handleChangeClassroom} value={dataClassroomId}>
           {dataStudent?.classrooms_students.map((c) => (
             <option key={c.id} value={c.id}>
-              {c.classroom.name}
+              {c.classroom.name} - {c.classroom.year}
             </option>
           ))}
         </select>
