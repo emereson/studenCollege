@@ -47,11 +47,11 @@ const Notes = ({ setselectData, dataClassroomId }) => {
   };
 
   const allCalifications = () => {
-    const lastFiveData = data?.slice(-5);
+    const lastFiveData = exams?.slice(-5);
 
     const allNotes = lastFiveData?.map((summary) => {
       const name = summary.name;
-      const notes = summary.exams.map((exam) => parseFloat(exam.note));
+      const notes = summary.courses.map((course) => parseFloat(course.note));
       const totalNotes = notes.reduce((total, note) => total + note, 0);
       const averageNote = totalNotes / notes.length;
 
@@ -60,6 +60,7 @@ const Notes = ({ setselectData, dataClassroomId }) => {
 
     setsummaryData(allNotes);
   };
+  console.log(exams?.slice(-5));
 
   return (
     <div className="notes__container">
