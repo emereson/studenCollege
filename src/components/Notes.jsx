@@ -3,6 +3,14 @@ import "./componentsStyle/notes.css";
 import axios from "axios";
 import config from "../utils/getToken";
 import Loading from "../hooks/Loading";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from "@heroui/react";
 
 const Notes = ({ setselectData, dataClassroomId }) => {
   const [exams, setExams] = useState([]);
@@ -106,28 +114,41 @@ const Notes = ({ setselectData, dataClassroomId }) => {
             className="bx bxs-x-circle"
           ></i>
           <article>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nota</th>
-                  <th>{califications()}</th>
-                </tr>
-              </thead>
-              <tbody>
+            <Table
+              aria-label="Tabla de productos"
+              color="default"
+              isStriped
+              classNames={{
+                base: "min-w-full overflow-hidden p-2",
+                wrapper: "p-0",
+              }}
+              radius="sm"
+              isCompact={true}
+              isHeaderSticky
+            >
+              <TableHeader>
+                <TableColumn className="text-xs text-white bg-black">
+                  Nota
+                </TableColumn>
+                <TableColumn className="text-xs text-white bg-black">
+                  {califications()}
+                </TableColumn>
+              </TableHeader>
+              <TableBody emptyContent="No hay notas ">
                 {weekData?.courses.map((course) => (
-                  <tr key={course.id}>
-                    <td>{course.name}</td>
-                    <td>
+                  <TableRow>
+                    <TableCell className="text-xs ">{course.name}</TableCell>
+                    <TableCell className="text-xs ">
                       {course.note === "20"
                         ? "A"
                         : course.note === "10"
                         ? "B"
                         : "C"}
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </article>
         </section>
       ) : (

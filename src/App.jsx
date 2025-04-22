@@ -7,11 +7,14 @@ import Login from "./pages/Login";
 import StudentReport from "./pages/StudentReport";
 import Levels from "./pages/Levels";
 import Gallery from "./pages/Gallery";
+import { Toaster } from "sonner";
 
 function App() {
   return (
     <div className="app__container">
       <Navigation />
+      <Toaster richColors />
+
       <Routes>
         <Route path="/log-in" element={<Login />} />
         <Route path="/niveles" element={<Levels />} />

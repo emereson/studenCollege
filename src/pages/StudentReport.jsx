@@ -9,6 +9,7 @@ import Calendar from "../components/Calendar";
 import Observation from "../components/Observation";
 import "./pagesStyle/studentReport.css";
 import Files from "../components/Files";
+import MyFiles from "../modules/myFiles/MyFiles";
 
 const StudentReport = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -139,6 +140,13 @@ const StudentReport = () => {
           <img src="./9746449.png" alt="" />
           <h4>Archivos</h4>
         </article>
+        <article
+          className="studentReport__section-two-archivos"
+          onClick={() => setSelectData("mis_archivos")}
+        >
+          <img src="./4807934.png" alt="" />
+          <h4>Mis Archivos</h4>
+        </article>
       </section>
 
       {selectData === "notifications" && (
@@ -182,6 +190,12 @@ const StudentReport = () => {
       )}
       {selectData === "archivos" && (
         <Files setselectData={setSelectData} classroomId={classroomId} />
+      )}
+      {selectData === "mis_archivos" && (
+        <MyFiles
+          setselectData={setSelectData}
+          dataClassroomId={dataClassroomId}
+        />
       )}
     </div>
   );

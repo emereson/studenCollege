@@ -199,21 +199,6 @@
   padding: 2em 0 2em 0;
 }
 
-.notes__section-three table {
-  background-color: var(--body-black);
-  color: rgb(0, 0, 0);
-}
-
-.notes__section-three th {
-  background-color: var(--body-white);
-  padding: 0.5em;
-}
-
-.notes__section-three td {
-  background-color: var(--body-white);
-  padding: 0.5em;
-}
-
 @media (max-height: 500px) {
   .notes__viewSummary article {
     height: 60%;

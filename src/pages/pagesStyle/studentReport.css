@@ -26,9 +26,9 @@
 }
 .studentReport__section-one p {
   position: absolute;
-  top: 0.5em;
+  top: 1em;
   right: 4em;
-  font-size: 0.7em;
+  font-size: 0.8em;
   border: 0.15em solid var(--body-white);
   padding: 0.5em;
   border-radius: 0.5em;
@@ -48,7 +48,7 @@
 
 .studentReport__section-one h3 {
   font-weight: 400;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .studentReport__section-one select {
