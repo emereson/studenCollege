@@ -53,6 +53,7 @@
   padding: 0.5em;
   border: none;
   border-bottom: 0.15em solid var(--text-color-gray);
+  color: black;
 }
 
 .login__form button {
